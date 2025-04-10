@@ -21,21 +21,10 @@ class SoundManager{
 
     constructor(){
         this.setupAll();
-        // window.addEventListener('mousemove', () => {
-        //     Howler.ctx.resume().then(() => {
-        //         console.log("Howler unlocked!");
-        //     }).catch((err) => console.error("Error unlocking Howler:", err));
-        // });
     }
-
-    // activateHowl =()=>{
-    //     Howler.ctx.resume().then(() => {
-    //         console.log("Howler unlocked!");
-    //     }).catch((err) => console.error("Error unlocking Howler:", err));
-    // }
-
     setupAll = () => {
-        this.soundMap = Object.fromEntries(Object.entries(this.sourceMap).map(([sound, srcPath])=>[ sound, new Howl ({
+        this.soundMap = Object.fromEntries(Object.entries(this.sourceMap).map(([sound, srcPath])=>[ sound, 
+            new Howl ({
                 src: [srcPath],
                 format: ['mp3'],
                 // html5: true,

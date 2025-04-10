@@ -256,8 +256,9 @@ body{
 
 .right{
   position: absolute;
-  right: 10%;
+  right: 25px;
   top: 50%;
+  transform: translate(0%,-50%);
   width:fit-content;
   height:fit-content;
   display: inline-block;
@@ -410,10 +411,13 @@ body{
 }
 
 .button-no-template{
-  background: none !important;
+  background: none;
   color: var(--blue3);
   width: fit-content;
   border: none;
+}
+.button-no-template:hover{
+  opacity:0.5;
 }
 
 /* INVENTORY */
@@ -454,7 +458,6 @@ body{
   min-height: 1px; 
   width:90%;
   height:70%;
-  
 }
 .inventory-content{
   text-align: start;
@@ -488,6 +491,7 @@ body{
   display: flex;
   align-items: center;
   width:85px;
+  text-transform: none;
 }
 .side-quest .inventory-empty{
   opacity: 0.5;
@@ -555,6 +559,10 @@ body{
   align-items: start;
   margin-top: 10px;
   text-align: center;
+  max-width: 88%;
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
 }
 
 /* ITEM */
@@ -599,6 +607,43 @@ body{
   /* align-items: center; */
 }
 
+.item-choice img{
+  width:85px;
+  height:85px;
+  align-self: center;
+}
+
+ .arrow-right-active, .arrow-right-inactive{
+  background: url('../assets/inventory/arrow.png') no-repeat center center;
+  background-size: contain; /* Ensures the whole image fits inside */
+  background-position: center;
+  aspect-ratio: 153/280;
+  /* transform: scaleX(-1);  */
+  margin: 20px;
+  margin-top:55px;
+  width: 15px;
+  border: none;
+  padding: 0;
+  border: none;
+}
+.arrow-right-inactive:hover, .arrow-left-inactive:hover{
+  filter: drop-shadow(0 0 0.4em #ffffffaa);
+}
+
+.arrow-left-active, .arrow-left-inactive{
+  background: url('../assets/inventory/arrow.png') no-repeat center center;
+  background-size: contain; /* Ensures the whole image fits inside */
+  background-position: center;
+  aspect-ratio: 153/280;
+  transform: scaleX(-1); 
+  margin: 20px;
+  margin-top:55px;
+  width: 15px;
+  border: none;
+  padding: 0;
+  border: none;
+}
+
 .frame-2 .center, .frame-2 .left, .frame .right{
   opacity:1.0;
 }
@@ -616,6 +661,50 @@ body{
 
 .arrow-prev{
   transform: scaleX(-1);
+}
+
+.side-quest-details{
+  font-size:10px;
+  width:27.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top:15px;
+}
+
+.status-title, .abilities-title, .needs-title{
+  background: var(--pink1);
+  color: var(--red1);
+  /* min-width: 150%; */
+  /* max-width: 180%; */
+  font-size:10px;
+  max-width: inherit;
+  padding:3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.abilities-title, .needs-title{
+  margin-top: 20px;
+}
+
+.status-content p{
+  margin-bottom:5px;
+  text-align: start;
+  text-transform: none;
+}
+
+.needs-content ul{
+  padding:0;
+  margin:5px;
+}
+
+.needs-content li{
+  margin-bottom:5px;
+  text-align: start;
+  text-transform: none;
 }
 
 /* HOVERDETAILS */

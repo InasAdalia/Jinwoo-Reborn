@@ -1,7 +1,10 @@
+import { addInvItem } from "../Context";
 import Button from "./Button";
 
 
 const LeftFrame=()=>{
+
+    const addItem = addInvItem();
     
     return(
         <div className="left-frame">
@@ -17,6 +20,7 @@ const LeftFrame=()=>{
                 <Button btnText='INVENTORY' toggles={'inventory'} template={'button'} />
                 <Button btnText='SUMMONS' toggles={'summons'} template={'button'} />
                 <Button btnText='HAEIN' toggles={'haein'} template={'button'} />
+                <button className="" onClick={addItem}>ADD</button>
             </div>
         </div>
     )

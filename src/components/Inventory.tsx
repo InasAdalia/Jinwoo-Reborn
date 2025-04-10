@@ -1,22 +1,41 @@
 import { useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import InventoryItem from "./InventoryItem";
-import { TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context.tsx";
+import { AllItems, InvItemContext, TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context.tsx";
 import { InvItemProps } from "../Props.tsx";
+import Item from "../Item.ts";
 
 
 const Inventory = () => {
     
-    // const {isOpen, setOpen} = useCustomContext(ToggleInvContext)
-    // const context = useContext(ToggleInvContext);
-    // if (!context) throw new Error("Context is not available");
-    // const {isOpen} = context
+    //handles toggling of inventory
     const {whichPopup} = useCustomContext(TogglePopupContext)
     const popup = 'inventory';
     const isOpen = whichPopup === popup;
     const [isHidden, setHide] = useState(!isOpen);
-
     toggleUseEffect(whichPopup, popup, isHidden, setHide);
+
+    const {invItems} = useCustomContext(InvItemContext);
+
+    
+    function render(category: 'weapons'|'others'){
+        let items = [... invItems].filter(item=> item.category===category).reverse() //items filtered by weapons/others
+        let renderComponent=[];
+        
+        const itemComponents = (items.map(item=>(
+            <InventoryItem itemName={items.length > items.indexOf(item) ? item.name : ''} titlePos={'bottom'} />
+        )))
+        
+        renderComponent.push(itemComponents)
+        for (let i=0; i<12-items.length; i++){   //rendering remaining boxes as empty
+            renderComponent.push(<InventoryItem itemName="" titlePos={'bottom'} />)
+        }
+        return renderComponent
+    }
+
+    
+
+    useEffect(()=>{}, [invItems]);
 
     return (
         <div className="center">
@@ -32,24 +51,14 @@ const Inventory = () => {
                     <div className="weapon-category">
                         Weapon & Powers
                         <div className="items-bar">
-                            <InventoryItem itemName="drumsticks" titlePos={'bottom'} />
-                            <InventoryItem itemName="isagi" titlePos={'bottom'} />
-                            <InventoryItem itemName="kyrie's shot" titlePos={'bottom'} />
-                            <InventoryItem itemName="ferarri keys" titlePos={'bottom'} />
-                            <InventoryItem itemName="" titlePos={'bottom'} />
-                            <InventoryItem itemName="" titlePos={'bottom'} />
+                            {render('weapons')}
                         </div>
                         
                     </div>
                     <div className="others-category mt-3">
                         Others
                         <div className="items-bar">
-                            <InventoryItem itemName="snickers" titlePos={'bottom'} />
-                            <InventoryItem itemName="disc" titlePos={'bottom'} />
-                            <InventoryItem itemName="emil's fart" titlePos={'bottom'} />
-                            <InventoryItem itemName="" titlePos={'bottom'} />
-                            <InventoryItem itemName="" titlePos={'bottom'} />
-                            <InventoryItem itemName="" titlePos={'bottom'} />
+                            {render('others')}
                             
                         </div>
                     </div>

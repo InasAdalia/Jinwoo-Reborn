@@ -1,7 +1,7 @@
 export interface ButtonProps{
     btnText: string
     toggles: 'info'|'inventory'|'summons' | 'haein' | null
-    template : 'button' | 'button-2' | 'info-button' | null
+    template : 'button' | 'button-2' | 'info-button' | 'arrow-right' | 'arrow-left'| null
 }
 
 export interface InfoButtonProps{

@@ -30,8 +30,24 @@ const SideQuest = () => {
                     <ItemChooser />
                 </div>
 
-                <div className="right">
-                    RIGHT
+                <div className="right side-quest-details">
+                    <div className="status-title">[ status ]</div>
+                    <div className="status-content">
+                        <p>Lvl: 1 - Awkward</p>
+                        <p>HP: 100%</p>
+                    </div>
+                   
+                    <div className="abilities-title">[ abilities ]</div>
+                    <div className="abilities-content">??</div>
+
+                    <div className="needs-title">[ needs ]</div>
+                    <div className="needs-content">
+                        <ul>
+                            <li>Reach Lvl 5</li>
+                            <li>cookie crumbs</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
