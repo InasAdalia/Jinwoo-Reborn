@@ -2,6 +2,7 @@ import Item from "./Item.tsx";
 import { InvItemProps } from "../Props.tsx";
 import soundManager from '../SoundManager'
 
+// this is the inventory box component
 const InventoryItem=({itemName, titlePos='bottom'}: InvItemProps)=>{
     return(
         <>

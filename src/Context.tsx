@@ -22,33 +22,14 @@ const toggleUseEffect=(whichPopup:string|null, curPopup:string, isHidden:boolean
     }, [whichPopup]);
 }
 
-// const items = [
-//     {   item_name : 'emil\'s drumsticks',
-//         category: 'weapon',
-//         effects: 'damage +20',
-//         MP_usage: 25,
-//         acquired :true
-//     },
-//     {   item_name : 'isagi\'s spatial awareness',
-//         category: 'weapon',
-//         effects: 'MP +50',
-//         MP_usage: 0,
-//         acquired : false
-//     },
-//     {   item_name : 'ferrari\'s keys',
-//         category: 'weapon',
-//         effects: 'damage +50',
-//         MP_usage: 25,
-//         acquired : false
-//     }
-// ]
-
 type InvItemType = {
     invItems: Set<Item>
     setInvItems: React.Dispatch<React.SetStateAction<Set<Item>>>
 }
+const InvItemContext= createContext<InvItemType|null>(null);
 
-const AllItems: Set<Item> = new Set([
+//inventory items data management
+const AllItems: Set<Item> = new Set([ //all items in the game
     new Item('drumsticks', 'weapons', 'damage', 20, 'enemy', 25, true),
     new Item('ferarri keys', 'weapons', 'MP', 50, 'enemy', 0, false),
     new Item('tiga\'s beam', 'weapons', 'MP', 50, 'enemy', 0, false),
@@ -56,11 +37,9 @@ const AllItems: Set<Item> = new Set([
     new Item('disc', 'others', 'level', +5, 'ally', 0, false),
     new Item('emil\'s fart', 'others', 'level', +1, 'ally', 0, false),
 ])
-const InvItems: Set<Item> = new Set([]);
+const InvItems: Set<Item> = new Set([]); //inventory items
 
-const InvItemContext= createContext<InvItemType|null>(null);
-
-const addInvItem = () =>{
+const addInvItem = () =>{ //temp testing adding item to inventory
     const {invItems, setInvItems} = useCustomContext(InvItemContext);
 
     return () => {
@@ -68,7 +47,6 @@ const addInvItem = () =>{
         const randomItem = [... AllItems][Math.floor(Math.random() * [... AllItems].length)]
         setInvItems(new Set([... [... invItems], randomItem]));
     }
-    
 }
 
 // Compilation of all context providers

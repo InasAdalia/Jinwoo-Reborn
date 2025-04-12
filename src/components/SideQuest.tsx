@@ -19,7 +19,7 @@ const SideQuest = () => {
                 <div className="top-center inventory-title">Hae-In</div>
 
                 <div className="top-right">
-                    <Button btnText='X' template={null} toggles={popup}/>
+                    <Button onClick={()=>{}} btnText='X' template={null} toggles={popup}/>
                 </div>
 
                 <div className="center">

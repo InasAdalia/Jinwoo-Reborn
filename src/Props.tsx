@@ -2,6 +2,7 @@ export interface ButtonProps{
     btnText: string
     toggles: 'info'|'inventory'|'summons' | 'haein' | null
     template : 'button' | 'button-2' | 'info-button' | 'arrow-right' | 'arrow-left'| null
+    onClick: ()=> void;
 }
 
 export interface InfoButtonProps{
@@ -36,4 +37,9 @@ export interface InvItemProps{
 }
 export interface ItemProps{
     itemName: string;
+}
+
+export interface ItemBarProps{
+    category: 'weapons' | 'others'
+    titlePos: 'top' | 'bottom'
 }

@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
-import InventoryItem from "./InventoryItem";
-import { AllItems, InvItemContext, TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context.tsx";
-import { InvItemProps } from "../Props.tsx";
-import Item from "../Item.ts";
+import { TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context.tsx";
+import ItemBar from "./ItemBar.tsx";
 
 
 const Inventory = () => {
@@ -15,27 +13,32 @@ const Inventory = () => {
     const [isHidden, setHide] = useState(!isOpen);
     toggleUseEffect(whichPopup, popup, isHidden, setHide);
 
-    const {invItems} = useCustomContext(InvItemContext);
+    //handles arrow&scroll direction
+    const [isNextWeapon, setWeaponDir] = useState(true); 
+    const [isNextOthers, setOthersDir] = useState(true);
 
-    
-    function render(category: 'weapons'|'others'){
-        let items = [... invItems].filter(item=> item.category===category).reverse() //items filtered by weapons/others
-        let renderComponent=[];
-        
-        const itemComponents = (items.map(item=>(
-            <InventoryItem itemName={items.length > items.indexOf(item) ? item.name : ''} titlePos={'bottom'} />
-        )))
-        
-        renderComponent.push(itemComponents)
-        for (let i=0; i<12-items.length; i++){   //rendering remaining boxes as empty
-            renderComponent.push(<InventoryItem itemName="" titlePos={'bottom'} />)
+    const handleScroll=(category: 'weapon'|'others', [isNextDir, setDir]: [boolean, React.Dispatch<React.SetStateAction<boolean>>])=>{
+
+        const whichBar= document.querySelector(`.${category}-category`)?.querySelector('.items-bar-bottom'); //the item-bar element of that category
+        if (whichBar) {
+
+            const scrollWidth = (whichBar.scrollWidth - whichBar.clientWidth);
+            const newScrollLeft = isNextDir ? whichBar.scrollLeft + scrollWidth / 2 : whichBar.scrollLeft - scrollWidth ;
+            whichBar.scrollLeft = newScrollLeft;
+
+            const isRightmost = Math.ceil(newScrollLeft + whichBar.clientWidth) >= whichBar.scrollWidth;
+            setDir(!isRightmost);
+            console.log(whichBar.scrollLeft, newScrollLeft, whichBar.clientWidth, whichBar.scrollWidth);
         }
-        return renderComponent
     }
 
-    
+    useEffect(()=>{}, [isNextWeapon, isNextOthers]);
 
-    useEffect(()=>{}, [invItems]);
+    const renderArrowBtn = (dir: 'right'|'left', cat: 'weapon'|'others', [isNextDir, setDir]: [boolean, React.Dispatch<React.SetStateAction<boolean>>])=>{
+        return <Button onClick={()=>{handleScroll(cat, [isNextDir, setDir])}} btnText={""} toggles={null} template={`arrow-${dir}`} />
+    }
+
+    document.querySelectorAll('.items-bar')?.forEach(bar=> bar.addEventListener('scroll', (e)=>{ e.preventDefault() }))
 
     return (
         <div className="center">
@@ -43,23 +46,25 @@ const Inventory = () => {
                 <div className="top-center inventory-title">Inventory</div>
 
                 <div className="top-right">
-                    <Button btnText='X' template={null} toggles={popup}/>
+                    <Button onClick={()=>{}} btnText='X' template={null} toggles={popup}/>
                 </div>
 
                 <div className="inventory-content center">
                     
                     <div className="weapon-category">
                         Weapon & Powers
-                        <div className="items-bar">
-                            {render('weapons')}
+                        <div className="inv-items-bar">
+                            <ItemBar category="weapons" titlePos="bottom"/>
+                            {renderArrowBtn(`${isNextWeapon?'right':'left'}`, 'weapon', [isNextWeapon, setWeaponDir])}
                         </div>
                         
+                        
                     </div>
-                    <div className="others-category mt-3">
+                    <div className="others-category mt-3n">
                         Others
-                        <div className="items-bar">
-                            {render('others')}
-                            
+                        <div className="inv-items-bar">
+                            <ItemBar category="others" titlePos="bottom"/>
+                            {renderArrowBtn(`${isNextOthers?'right':'left'}`, 'others', [isNextOthers, setOthersDir])}
                         </div>
                     </div>
                     

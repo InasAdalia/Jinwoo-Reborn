@@ -16,10 +16,10 @@ const LeftFrame=()=>{
                 <p>HP: 50</p>
             </div>
             <div className="action-buttons">
-                <Button btnText='' toggles={'info'} template={'info-button'} />
-                <Button btnText='INVENTORY' toggles={'inventory'} template={'button'} />
-                <Button btnText='SUMMONS' toggles={'summons'} template={'button'} />
-                <Button btnText='HAEIN' toggles={'haein'} template={'button'} />
+                <Button onClick={()=>{}} btnText='' toggles={'info'} template={'info-button'} />
+                <Button onClick={()=>{}} btnText='INVENTORY' toggles={'inventory'} template={'button'} />
+                <Button onClick={()=>{}} btnText='SUMMONS' toggles={'summons'} template={'button'} />
+                <Button onClick={()=>{}} btnText='HAEIN' toggles={'haein'} template={'button'} />
                 <button className="" onClick={addItem}>ADD</button>
             </div>
         </div>

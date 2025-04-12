@@ -28,7 +28,7 @@ function Info(){
                 </div>
 
                 <div className="top-right">
-                    <Button btnText={'X'} template={null}toggles={popup} />
+                    <Button onClick={()=>{}} btnText={'X'} template={null}toggles={popup} />
                 </div>
 
                 <div className="center">
@@ -39,9 +39,9 @@ function Info(){
                 </div>
 
                 <div className='bottom-center'>
-                    <Button btnText='YES' template={'button'} toggles={null}/>
+                    <Button onClick={()=>{}} btnText='YES' template={'button'} toggles={null}/>
                     <a className="mx-2"></a>
-                    <Button btnText='NO' template={'button'} toggles={null}/>
+                    <Button onClick={()=>{}} btnText='NO' template={'button'} toggles={null}/>
                 </div>
             </div>
         </div>

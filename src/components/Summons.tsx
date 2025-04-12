@@ -17,7 +17,7 @@ const Summons = () => {
             <div className="top-center inventory-title">Summons</div>
 
             <div className="top-right">
-                <Button btnText='X' template={null}toggles={popup}/>
+                <Button onClick={()=>{}} btnText='X' template={null}toggles={popup}/>
             </div>
 
             <div className="inventory-content center">
