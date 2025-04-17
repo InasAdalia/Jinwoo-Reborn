@@ -1,7 +1,9 @@
+import Item from "./Item";
+
 export interface ButtonProps{
     btnText: string
     toggles: 'info'|'inventory'|'summons' | 'haein' | null
-    template : 'button' | 'button-2' | 'info-button' | 'arrow-right' | 'arrow-left'| null
+    template : 'button' | 'info-button' | 'arrow-right' | 'arrow-left'| null
     onClick: ()=> void;
 }
 
@@ -41,5 +43,13 @@ export interface ItemProps{
 
 export interface ItemBarProps{
     category: 'weapons' | 'others'
-    titlePos: 'top' | 'bottom'
+    // titlePos: 'top' | 'bottom'
+    context: Set<Item>
+    invBoxes: number
+}
+
+export interface ItemChooserProps{
+    itemDetails: string | null
+    buttonText: string
+    buttonOnClick: (item: Item | null) => void 
 }

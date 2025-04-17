@@ -11,7 +11,7 @@ const SideQuest = () => {
     const popup = 'haein';
     const isOpen = whichPopup === popup;
 
-    toggleUseEffect(whichPopup, popup, isHidden, setHide);
+    toggleUseEffect(whichPopup, popup, setHide);
 
     return(
         <div className="center">
@@ -19,7 +19,7 @@ const SideQuest = () => {
                 <div className="top-center inventory-title">Hae-In</div>
 
                 <div className="top-right">
-                    <Button onClick={()=>{}} btnText='X' template={null} toggles={popup}/>
+                    <Button  onClick={()=>{}} btnText='X' template={null} toggles={popup}/>
                 </div>
 
                 <div className="center">
@@ -27,7 +27,7 @@ const SideQuest = () => {
                 </div>
 
                 <div className="left">
-                    <ItemChooser />
+                    <ItemChooser itemDetails={'hmm I wonder if she likes it'} buttonText="GIVE" buttonOnClick={()=>console.log('give')}/>
                 </div>
 
                 <div className="right side-quest-details">

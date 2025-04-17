@@ -9,7 +9,7 @@ const Summons = () => {
     const popup = 'summons';
     const isOpen = whichPopup === popup;
     const [isHidden, setHide] = useState(!isOpen);
-    toggleUseEffect(whichPopup, popup, isHidden, setHide);
+    toggleUseEffect(whichPopup, popup, setHide);
 
     return(
     <div className='center'>
@@ -17,7 +17,7 @@ const Summons = () => {
             <div className="top-center inventory-title">Summons</div>
 
             <div className="top-right">
-                <Button onClick={()=>{}} btnText='X' template={null}toggles={popup}/>
+                <Button  onClick={()=>{}} btnText='X' template={null}toggles={popup}/>
             </div>
 
             <div className="inventory-content center">

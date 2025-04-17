@@ -1,68 +1,63 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Item from "./Item";
+import { EquippedItems, InvItems } from "./GameData";
 
 type TogglePopupType = {
     whichPopup: string|null; //'info', 'inventory', 'summons', 'haein'
     setPopup: React.Dispatch<React.SetStateAction<string|null>>
 };
+type MainFrameType = {
+    mainContent: string
+    setMainContent: React.Dispatch<React.SetStateAction<string>>
+}
+type InvItemType = {
+    invItems: Set<Item>
+    setInvItems: React.Dispatch<React.SetStateAction<Set<Item>>>
+}
+export type EqItemType = {
+    eqItems: Set<Item>;
+    setEqItems: React.Dispatch<React.SetStateAction<Set<Item>>>
+}
 
 const TogglePopupContext = createContext<TogglePopupType | null>(null) 
+const MainFrameContext = createContext<MainFrameType | null>(null)
+const InvItemContext= createContext<InvItemType|null>(null);
+const EqItemContext = createContext<EqItemType|null>(null);
 
+// useEffect that allows open/close transition
+const toggleUseEffect=(whichPopup:string|null, curPopup:string, setHide:any)=>{
+    useEffect(() => {
+        whichPopup===curPopup ? (setHide(false)) : (setTimeout(() => setHide(true), 500));
+    }, [whichPopup]);
+}
 
+//custom hook
 function useCustomContext<T>(whatContext: React.Context<null|T>):T{
     const context = useContext(whatContext);
     if (!context) throw new Error("Context is not available");
     return context
 }
 
-// useEffect that allows open/close transition
-const toggleUseEffect=(whichPopup:string|null, curPopup:string, isHidden:boolean, setHide:any)=>{
-    useEffect(() => {
-        whichPopup===curPopup ? (setHide(false)) : (setTimeout(() => setHide(true), 500));
-    }, [whichPopup]);
-}
-
-type InvItemType = {
-    invItems: Set<Item>
-    setInvItems: React.Dispatch<React.SetStateAction<Set<Item>>>
-}
-const InvItemContext= createContext<InvItemType|null>(null);
-
-//inventory items data management
-const AllItems: Set<Item> = new Set([ //all items in the game
-    new Item('drumsticks', 'weapons', 'damage', 20, 'enemy', 25, true),
-    new Item('ferarri keys', 'weapons', 'MP', 50, 'enemy', 0, false),
-    new Item('tiga\'s beam', 'weapons', 'MP', 50, 'enemy', 0, false),
-    new Item('snickers', 'others', 'level', +5, 'ally', 25, true),
-    new Item('disc', 'others', 'level', +5, 'ally', 0, false),
-    new Item('emil\'s fart', 'others', 'level', +1, 'ally', 0, false),
-])
-const InvItems: Set<Item> = new Set([]); //inventory items
-
-const addInvItem = () =>{ //temp testing adding item to inventory
-    const {invItems, setInvItems} = useCustomContext(InvItemContext);
-
-    return () => {
-        console.log(invItems);
-        const randomItem = [... AllItems][Math.floor(Math.random() * [... AllItems].length)]
-        setInvItems(new Set([... [... invItems], randomItem]));
-    }
-}
-
 // Compilation of all context providers
 const GameProvider=({ children }: { children: React.ReactNode })=>{
 
+    const [mainContent, setMainContent] = useState<string>('')
     const [whichPopup, setPopup] = useState<string|null>(null)
     const [invItems, setInvItems] = useState<Set<Item>>(InvItems);
+    const [eqItems, setEqItems] = useState<Set<Item>>(EquippedItems);
 
     return(
-        <InvItemContext.Provider value={{invItems, setInvItems}} >
-            <TogglePopupContext.Provider value={{ whichPopup, setPopup }}>
-                {children}
-            </TogglePopupContext.Provider>
-        </InvItemContext.Provider>
+        <MainFrameContext.Provider value={{mainContent, setMainContent}} >
+            <InvItemContext.Provider value={{invItems, setInvItems}} >
+                <TogglePopupContext.Provider value={{ whichPopup, setPopup }}>
+                    <EqItemContext.Provider value={{eqItems, setEqItems}} >
+                        {children}
+                    </EqItemContext.Provider>
+                </TogglePopupContext.Provider>
+            </InvItemContext.Provider>
+        </MainFrameContext.Provider>
     )
 }
 
-export {TogglePopupContext, InvItemContext, useCustomContext, GameProvider, toggleUseEffect, addInvItem, AllItems}
+export {TogglePopupContext, InvItemContext, EqItemContext,MainFrameContext, useCustomContext, GameProvider, toggleUseEffect}
 

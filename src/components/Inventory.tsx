@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
-import { TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context.tsx";
+import { InvItemContext, TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context.tsx";
 import ItemBar from "./ItemBar.tsx";
 
 
@@ -11,9 +11,11 @@ const Inventory = () => {
     const popup = 'inventory';
     const isOpen = whichPopup === popup;
     const [isHidden, setHide] = useState(!isOpen);
-    toggleUseEffect(whichPopup, popup, isHidden, setHide);
+    toggleUseEffect(whichPopup, popup, setHide);
 
-    //handles arrow&scroll direction
+    const {invItems} = useCustomContext(InvItemContext);
+
+    //handles next/prev arrows & scroll direction
     const [isNextWeapon, setWeaponDir] = useState(true); 
     const [isNextOthers, setOthersDir] = useState(true);
 
@@ -21,24 +23,23 @@ const Inventory = () => {
 
         const whichBar= document.querySelector(`.${category}-category`)?.querySelector('.items-bar-bottom'); //the item-bar element of that category
         if (whichBar) {
-
-            const scrollWidth = (whichBar.scrollWidth - whichBar.clientWidth);
+            //scrolls the item-bar
+            const scrollWidth = whichBar.clientWidth;
             const newScrollLeft = isNextDir ? whichBar.scrollLeft + scrollWidth / 2 : whichBar.scrollLeft - scrollWidth ;
-            whichBar.scrollLeft = newScrollLeft;
+            whichBar.scrollLeft = newScrollLeft; 
 
+            //flips the arrow if necessary
             const isRightmost = Math.ceil(newScrollLeft + whichBar.clientWidth) >= whichBar.scrollWidth;
-            setDir(!isRightmost);
-            console.log(whichBar.scrollLeft, newScrollLeft, whichBar.clientWidth, whichBar.scrollWidth);
+            setDir(!isRightmost); 
+
+            // console.log(whichBar.scrollLeft, newScrollLeft, whichBar.clientWidth, whichBar.scrollWidth);
         }
     }
 
-    useEffect(()=>{}, [isNextWeapon, isNextOthers]);
-
     const renderArrowBtn = (dir: 'right'|'left', cat: 'weapon'|'others', [isNextDir, setDir]: [boolean, React.Dispatch<React.SetStateAction<boolean>>])=>{
-        return <Button onClick={()=>{handleScroll(cat, [isNextDir, setDir])}} btnText={""} toggles={null} template={`arrow-${dir}`} />
+        return <Button  onClick={()=>{handleScroll(cat, [isNextDir, setDir])}} 
+        btnText={""} toggles={null} template={`arrow-${dir}`} />
     }
-
-    document.querySelectorAll('.items-bar')?.forEach(bar=> bar.addEventListener('scroll', (e)=>{ e.preventDefault() }))
 
     return (
         <div className="center">
@@ -46,7 +47,7 @@ const Inventory = () => {
                 <div className="top-center inventory-title">Inventory</div>
 
                 <div className="top-right">
-                    <Button onClick={()=>{}} btnText='X' template={null} toggles={popup}/>
+                    <Button  onClick={()=>{}} btnText='X' template={null} toggles={popup}/>
                 </div>
 
                 <div className="inventory-content center">
@@ -54,7 +55,7 @@ const Inventory = () => {
                     <div className="weapon-category">
                         Weapon & Powers
                         <div className="inv-items-bar">
-                            <ItemBar category="weapons" titlePos="bottom"/>
+                            <ItemBar category="weapons" context={invItems} invBoxes={12}/>
                             {renderArrowBtn(`${isNextWeapon?'right':'left'}`, 'weapon', [isNextWeapon, setWeaponDir])}
                         </div>
                         
@@ -63,7 +64,7 @@ const Inventory = () => {
                     <div className="others-category mt-3n">
                         Others
                         <div className="inv-items-bar">
-                            <ItemBar category="others" titlePos="bottom"/>
+                            <ItemBar category="others" context={invItems} invBoxes={12}/>
                             {renderArrowBtn(`${isNextOthers?'right':'left'}`, 'others', [isNextOthers, setOthersDir])}
                         </div>
                     </div>

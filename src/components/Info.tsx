@@ -14,7 +14,7 @@ function Info(){
     const popup = 'info';
     const isOpen = whichPopup === popup;
 
-    toggleUseEffect(whichPopup, popup, isHidden, setHide); //activates a useEffect that listens for open/close of info
+    toggleUseEffect(whichPopup, popup, setHide); //activates a useEffect that listens for open/close of info
 
     return(
         <div className="center">
@@ -28,7 +28,7 @@ function Info(){
                 </div>
 
                 <div className="top-right">
-                    <Button onClick={()=>{}} btnText={'X'} template={null}toggles={popup} />
+                    <Button  onClick={()=>{}} btnText={'X'} template={null}toggles={popup} />
                 </div>
 
                 <div className="center">
@@ -39,9 +39,9 @@ function Info(){
                 </div>
 
                 <div className='bottom-center'>
-                    <Button onClick={()=>{}} btnText='YES' template={'button'} toggles={null}/>
+                    <Button  onClick={()=>{}} btnText='YES' template={'button'} toggles={null}/>
                     <a className="mx-2"></a>
-                    <Button onClick={()=>{}} btnText='NO' template={'button'} toggles={null}/>
+                    <Button  onClick={()=>{}} btnText='NO' template={'button'} toggles={null}/>
                 </div>
             </div>
         </div>

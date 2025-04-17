@@ -1,50 +1,56 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import Button from "./Button"
 import InventoryItem from "./InventoryItem";
-import { InvItemContext, useCustomContext } from "../Context";
+import { EqItemContext, InvItemContext, useCustomContext } from "../Context";
 import Item from "../Item";
+import { ItemChooserProps } from "../Props";
+import { unequipItem } from "../GameData";
 
-const ItemChooser = () => {
-
-    
+const ItemChooser = ({itemDetails, buttonText, buttonOnClick}: ItemChooserProps) => {
 
     const {invItems} = useCustomContext(InvItemContext);
+    const {eqItems, setEqItems} = useCustomContext(EqItemContext);
     const [index, setIndex] = useState(0);
-    const [category, setCategory] = useState<string>('weapons');
+    const [category] = useState<'weapons'| 'others'>('weapons');
+    const [curItem, setCurItem] = useState<Item|null>(null);
+    const [isEquipped, setIsEquipped] = useState(false);
     let itemList: Item[] = [];
 
-    // useEffect(() => {
-    //     itemList = [...invItems].filter(item=> item.category === category).reverse()
-    // }, [invItems]);
-    const handleNext = (number: number) =>{
-        console.log(index, index+number, itemList, itemList.length);
-        (index+number<0) 
-        ? setIndex(0) 
-        : (index+number<itemList.length) && setIndex(index+number);
-
-        console.log(index)
-    }
-
-    const renderItem = (category: string) =>{
+    const renderItem = (category: 'weapons'|'others') =>{
         itemList = [...invItems].filter(item=> item.category === category).reverse();
-        console.log(category);
-
-        return(itemList.length===0)?(
-            <InventoryItem itemName={""} titlePos={'top'}/>
-        ):(
-            <InventoryItem itemName={itemList[index].name} titlePos={'top'}/>
-        )  
+        
+        return <InventoryItem itemName={(curItem && itemList.length>0) ?curItem.name:""} titlePos={'top'}/>
     }
     
+    const handleNext = (number: number) =>{
+        (index+number<0) 
+        ? (setIndex(0))
+        : (index+number<itemList.length) && setIndex(index+number);
+    }
+
+    useEffect(()=>{
+        setCurItem(itemList.length>0 ? itemList[index]: null);   
+        (curItem && buttonText === 'EQUIP') && [... eqItems].includes(curItem) ? setIsEquipped(true): setIsEquipped(false);
+        
+    },[itemList, index]);
+
+    
+
+
+
     return (
         <div className="item-chooser-frame">
             <div className="item-choice">
-                <Button onClick={()=>{handleNext(-1)}} btnText={""} toggles={null} template={'arrow-left'} />
+                <Button  onClick={()=>{handleNext(-1)}} btnText={""} toggles={null} template={'arrow-left'}/>
                 {renderItem(category)}
-                <Button onClick={()=>{handleNext(1)}} btnText={""} toggles={null} template={'arrow-right'} />
+                <Button  onClick={()=>{handleNext(1)}} btnText={""} toggles={null} template={'arrow-right'}/>
             </div>
-            <Button onClick={()=>{}} btnText={"GIVE"} toggles={null} template={'button-2'} />
-            <p className="details">Hmm.. See if she likes it or not</p>
+            <Button  
+                onClick={() => (!isEquipped)
+                    ? buttonOnClick(curItem)
+                    : unequipItem(curItem?curItem.name:null, {eqItems,setEqItems})} 
+                    btnText={isEquipped ? 'UNEQUIP' : buttonText} toggles={null} template={'button'}/>
+            <p className="details">{itemDetails}</p>
         </div>
     )
 }
