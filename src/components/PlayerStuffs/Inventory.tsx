@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Button from "./Button";
-import { InvItemContext, TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context.tsx";
+import Button from "../Button.tsx";
+import { InvItemContext, TogglePopupContext, toggleUseEffect, useCustomContext } from "../../Context.tsx";
 import ItemBar from "./ItemBar.tsx";
 
 
@@ -19,7 +19,7 @@ const Inventory = () => {
     const [isNextWeapon, setWeaponDir] = useState(true); 
     const [isNextOthers, setOthersDir] = useState(true);
 
-    const handleScroll=(category: 'weapon'|'others', [isNextDir, setDir]: [boolean, React.Dispatch<React.SetStateAction<boolean>>])=>{
+    const handleScroll=(category: 'weapons'|'others', [isNextDir, setDir]: [boolean, React.Dispatch<React.SetStateAction<boolean>>])=>{
 
         const whichBar= document.querySelector(`.${category}-category`)?.querySelector('.items-bar-bottom'); //the item-bar element of that category
         if (whichBar) {
@@ -36,7 +36,7 @@ const Inventory = () => {
         }
     }
 
-    const renderArrowBtn = (dir: 'right'|'left', cat: 'weapon'|'others', [isNextDir, setDir]: [boolean, React.Dispatch<React.SetStateAction<boolean>>])=>{
+    const renderArrowBtn = (dir: 'right'|'left', cat: 'weapons'|'others', [isNextDir, setDir]: [boolean, React.Dispatch<React.SetStateAction<boolean>>])=>{
         return <Button  onClick={()=>{handleScroll(cat, [isNextDir, setDir])}} 
         btnText={""} toggles={null} template={`arrow-${dir}`} />
     }
@@ -56,7 +56,7 @@ const Inventory = () => {
                         Weapon & Powers
                         <div className="inv-items-bar">
                             <ItemBar category="weapons" context={invItems} invBoxes={12}/>
-                            {renderArrowBtn(`${isNextWeapon?'right':'left'}`, 'weapon', [isNextWeapon, setWeaponDir])}
+                            {renderArrowBtn(`${isNextWeapon?'right':'left'}`, 'weapons', [isNextWeapon, setWeaponDir])}
                         </div>
                         
                         

@@ -1,5 +1,5 @@
-import { EqItemContext, useCustomContext } from "../Context"
-import ItemBar from "./ItemBar"
+import { useCustomContext, EqItemContext } from "../../Context";
+import ItemBar from "../PlayerStuffs/ItemBar";
 
 const BottomFrame = ()=>{
 
@@ -13,4 +13,4 @@ const BottomFrame = ()=>{
     )
 }
 
-export default BottomFrame
+export default BottomFrame;

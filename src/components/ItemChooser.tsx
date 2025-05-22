@@ -1,8 +1,8 @@
 import {  useEffect, useState } from "react";
 import Button from "./Button"
-import InventoryItem from "./InventoryItem";
+import InventoryItem from "./PlayerStuffs/InventoryItem";
 import { EqItemContext, InvItemContext, useCustomContext } from "../Context";
-import Item from "../Item";
+import ItemType from "../GameData";
 import { ItemChooserProps } from "../Props";
 import { unequipItem } from "../GameData";
 
@@ -12,13 +12,12 @@ const ItemChooser = ({itemDetails, buttonText, buttonOnClick}: ItemChooserProps)
     const {eqItems, setEqItems} = useCustomContext(EqItemContext);
     const [index, setIndex] = useState(0);
     const [category] = useState<'weapons'| 'others'>('weapons');
-    const [curItem, setCurItem] = useState<Item|null>(null);
+    const [curItem, setCurItem] = useState<ItemType|null>(null);
     const [isEquipped, setIsEquipped] = useState(false);
-    let itemList: Item[] = [];
+    let itemList: ItemType[] = [];
 
     const renderItem = (category: 'weapons'|'others') =>{
         itemList = [...invItems].filter(item=> item.category === category).reverse();
-        
         return <InventoryItem itemName={(curItem && itemList.length>0) ?curItem.name:""} titlePos={'top'}/>
     }
     
@@ -31,13 +30,9 @@ const ItemChooser = ({itemDetails, buttonText, buttonOnClick}: ItemChooserProps)
     useEffect(()=>{
         setCurItem(itemList.length>0 ? itemList[index]: null);   
         (curItem && buttonText === 'EQUIP') && [... eqItems].includes(curItem) ? setIsEquipped(true): setIsEquipped(false);
-        
     },[itemList, index]);
 
     
-
-
-
     return (
         <div className="item-chooser-frame">
             <div className="item-choice">
@@ -46,10 +41,10 @@ const ItemChooser = ({itemDetails, buttonText, buttonOnClick}: ItemChooserProps)
                 <Button  onClick={()=>{handleNext(1)}} btnText={""} toggles={null} template={'arrow-right'}/>
             </div>
             <Button  
-                onClick={() => (!isEquipped)
-                    ? buttonOnClick(curItem)
-                    : unequipItem(curItem?curItem.name:null, {eqItems,setEqItems})} 
-                    btnText={isEquipped ? 'UNEQUIP' : buttonText} toggles={null} template={'button'}/>
+                onClick={() => (isEquipped)
+                    ? unequipItem(curItem?curItem.name:null, {eqItems,setEqItems})
+                    : buttonOnClick(curItem)}
+                btnText={isEquipped ? 'UNEQUIP' : buttonText} toggles={null} template={'button'}/>
             <p className="details">{itemDetails}</p>
         </div>
     )

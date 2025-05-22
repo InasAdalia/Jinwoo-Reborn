@@ -1,5 +1,5 @@
-import Character from './Character.tsx'
-import { RightFrameProps } from '../Props.tsx';
+import Character from '../Character.tsx'
+import { RightFrameProps } from '../../Props.tsx';
 // import { useState } from 'react';
 
 

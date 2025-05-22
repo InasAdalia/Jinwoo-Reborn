@@ -1,10 +1,9 @@
-import {MainFrameProps} from '../Props.tsx'
-import Info from '../components/Info.tsx'
-import Inventory from './Inventory.tsx'
-import Summons from './Summons.tsx';
-import { MainFrameContext, TogglePopupContext, useCustomContext } from '../Context.tsx';
-import SideQuest from './SideQuest.tsx';
-import PreFight from './PreFight.tsx';
+import Info from '../Info.tsx'
+import Inventory from '../PlayerStuffs/Inventory.tsx'
+import Summons from '../PlayerStuffs/Summons.tsx';
+import { MainFrameContext, TogglePopupContext, useCustomContext } from '../../Context.tsx';
+import SideQuest from '../PlayerStuffs/SideQuest.tsx';
+import PreFight from '../PreFight.tsx';
 
 const MainFrame = () =>{
 

@@ -789,6 +789,10 @@ inv-items-bar .arrow-left-inactive{
   margin-top: 20px;
 }
 
+.abilities-content{
+  text-transform: none;
+}
+
 .status-content p{
   margin-bottom:5px;
   text-align: start;

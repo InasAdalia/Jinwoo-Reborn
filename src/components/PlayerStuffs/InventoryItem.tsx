@@ -1,9 +1,8 @@
 import Item from "./Item.tsx";
-import { InvItemProps } from "../Props.tsx";
-import soundManager from '../SoundManager'
-import { unequipItem } from "../GameData.ts";
-import { useEffect } from "react";
-import { useCustomContext, EqItemContext } from "../Context.tsx";
+import { InvItemProps } from "../../Props.tsx";
+import soundManager from '../../SoundManager.ts'
+import { unequipItem } from "../../GameData.ts";
+import { useCustomContext, EqItemContext } from "../../Context.tsx";
 
 // this is the inventory box component
 const InventoryItem=({itemName, titlePos='bottom'}: InvItemProps)=>{

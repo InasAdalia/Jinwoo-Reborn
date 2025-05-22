@@ -1,4 +1,4 @@
-import Item from "./Item";
+import ItemType from "./GameData";
 
 export interface ButtonProps{
     btnText: string
@@ -44,12 +44,12 @@ export interface ItemProps{
 export interface ItemBarProps{
     category: 'weapons' | 'others'
     // titlePos: 'top' | 'bottom'
-    context: Set<Item>
+    context: ItemType[]
     invBoxes: number
 }
 
 export interface ItemChooserProps{
     itemDetails: string | null
     buttonText: string
-    buttonOnClick: (item: Item | null) => void 
+    buttonOnClick: (item: ItemType | null) => void 
 }

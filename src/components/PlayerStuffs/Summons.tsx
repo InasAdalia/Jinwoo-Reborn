@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context"
-import Button from "./Button"
+import { TogglePopupContext, toggleUseEffect, useCustomContext } from "../../Context"
+import Button from "../Button"
 
 const Summons = () => {
 

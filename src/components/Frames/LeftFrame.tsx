@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { MainFrameContext, useCustomContext } from "../Context";
-import { addInvItem } from "../GameData";
-import Button from "./Button";
+import { MainFrameContext, useCustomContext } from "../../Context";
+import { addInvItem, player } from "../../GameData";
+import Button from "../Button";
 
 
 const LeftFrame=()=>{
@@ -22,9 +21,9 @@ const LeftFrame=()=>{
             {/* MP,HP, Level */}
             {/* Inventory, Summon, Haein Button */}
             <div className="status">
-                <p>LVL: 1</p>
-                <p>MP: 50</p>
-                <p>HP: 50</p>
+                <p>LVL: {player.level.curAmount}</p>
+                <p>MP: {player.MP.curAmount}</p>
+                <p>HP: {player.HP.curAmount}</p>
             </div>
             <div className="action-buttons">
                 <Button  onClick={()=>{}} btnText='' toggles={'info'} template={'info-button'} />

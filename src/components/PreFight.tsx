@@ -1,5 +1,5 @@
 import { useCustomContext, EqItemContext, InvItemContext, TogglePopupContext } from "../Context";
-import Item from "../Item";
+import ItemType, { curEnemy } from "../GameData";
 import ItemChooser from "./ItemChooser";
 
 const PreFight = ()=>{
@@ -8,10 +8,9 @@ const PreFight = ()=>{
     const {eqItems, setEqItems} = useCustomContext(EqItemContext);
     const enemy = 'baran'
 
-    const equipItems=(item: Item|null)=>{
+    const equipItems=(item: ItemType|null)=>{
         console.log('to be equipped: ' + item);
-        const eqItemsArray = [... eqItems];
-        item && setEqItems(new Set([... eqItemsArray, item]))
+        item && setEqItems([... eqItems, item])
     }
     
     const renderEquipButton = () =>{
@@ -29,13 +28,12 @@ const PreFight = ()=>{
             <div className="center">VS</div>
             <div className="right">
                 <div className="enemy-frame">
-                    <div className="enemy-name">The Ant King</div>
+                    <div className="enemy-name">{curEnemy.name}</div>
                     <img className="enemy-sprite" src={`../src/assets/enemies/sprite-${enemy}.png`} alt="" />
                     <div className="details">
-                        <p>HP: 1020</p>
-                        <p>Power: 304</p>
-                        <p>Speed: 100</p>
-                        <p>Intelligence: 205</p>
+                        <p>Power: {curEnemy.strength.curAmount}</p>
+                        <p>Speed: {curEnemy.speed.curAmount}</p>
+                        <p>Intelligence: {curEnemy.intelligence.curAmount}</p>
                     </div>
                 </div>
             </div>

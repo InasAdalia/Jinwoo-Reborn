@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { TogglePopupContext, toggleUseEffect, useCustomContext } from "../Context";
-import Button from "./Button";
-import Character from "./Character";
-import ItemChooser from "./ItemChooser";
+import { TogglePopupContext, toggleUseEffect, useCustomContext } from "../../Context";
+import Button from "../Button";
+import Character from "../Character";
+import ItemChooser from "../ItemChooser";
+import { ally } from "../../GameData";
 
 const SideQuest = () => {
 
@@ -33,12 +34,12 @@ const SideQuest = () => {
                 <div className="right side-quest-details">
                     <div className="status-title">[ status ]</div>
                     <div className="status-content">
-                        <p>Lvl: 1 - Awkward</p>
+                        <p>Lvl: {ally.level.curAmount} - {ally.levelStatus}</p>
                         <p>HP: 100%</p>
                     </div>
                    
                     <div className="abilities-title">[ abilities ]</div>
-                    <div className="abilities-content">??</div>
+                    <div className="abilities-content">{ally.abilities}</div>
 
                     <div className="needs-title">[ needs ]</div>
                     <div className="needs-content">

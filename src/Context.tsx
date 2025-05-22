@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import Item from "./Item";
+import ItemType from "./GameData";
 import { EquippedItems, InvItems } from "./GameData";
 
 type TogglePopupType = {
@@ -11,12 +11,12 @@ type MainFrameType = {
     setMainContent: React.Dispatch<React.SetStateAction<string>>
 }
 type InvItemType = {
-    invItems: Set<Item>
-    setInvItems: React.Dispatch<React.SetStateAction<Set<Item>>>
+    invItems: ItemType[]
+    setInvItems: React.Dispatch<React.SetStateAction<ItemType[]>>
 }
 export type EqItemType = {
-    eqItems: Set<Item>;
-    setEqItems: React.Dispatch<React.SetStateAction<Set<Item>>>
+    eqItems: ItemType[];
+    setEqItems: React.Dispatch<React.SetStateAction<ItemType[]>>
 }
 
 const TogglePopupContext = createContext<TogglePopupType | null>(null) 
@@ -43,8 +43,8 @@ const GameProvider=({ children }: { children: React.ReactNode })=>{
 
     const [mainContent, setMainContent] = useState<string>('')
     const [whichPopup, setPopup] = useState<string|null>(null)
-    const [invItems, setInvItems] = useState<Set<Item>>(InvItems);
-    const [eqItems, setEqItems] = useState<Set<Item>>(EquippedItems);
+    const [invItems, setInvItems] = useState<ItemType[]>(InvItems);
+    const [eqItems, setEqItems] = useState<ItemType[]>(EquippedItems);
 
     return(
         <MainFrameContext.Provider value={{mainContent, setMainContent}} >
