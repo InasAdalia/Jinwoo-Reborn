@@ -1,0 +1,26 @@
+.itemBarScrollerContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.scrollerWrapper{
+    width: calc(80px * 6);
+    height: fit-content;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    
+}
+
+.arrow-left, .arrow-right{
+    width: 15px;
+    z-index: 1;
+    margin-top: 10px;
+}
+
+.arrow-left{
+    transform: scaleX(-1); 
+}

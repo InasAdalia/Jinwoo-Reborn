@@ -1,0 +1,26 @@
+.inventoryWrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.inventoryFrame{
+    display: flex;
+}
+
+.title, .content{
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.weaponCategory, .othersCategory{
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.content{
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}

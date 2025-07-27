@@ -1,0 +1,50 @@
+.button{
+    font-family: 'BetterVCR';
+    font-size: 1rem;
+    background: none;
+    border: none;
+}
+
+.hasTemplate{
+    /* width: 100px; */
+    color:var(--blue3);
+    background: transparent;
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    aspect-ratio: 110 / 40;
+    padding:0;
+}
+
+
+.button-1, .button-2{
+    width: 140px;
+    min-width: fit-content;
+    padding: 0.5rem 1rem;
+    color: var(--purple2);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.arrow{
+    width: 3rem;
+    height: 3rem;
+}
+
+.info-button{
+    height: 4rem;
+    width: 4rem;
+    margin: 0.5rem;
+}
+
+
+.active{
+    filter: drop-shadow(0 0 2em var(--purple-shadow));
+    color: var(--blue3);
+}
+
+.disabled{
+    opacity: 0.75;
+    pointer-events: none;
+}

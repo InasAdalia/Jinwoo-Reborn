@@ -1,0 +1,78 @@
+:root {
+  font-family: 'BetterVCR';
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* COLOR CODES */
+  --purple1: #2e1b5b;
+  --purple2: #413267;
+  --purple3: #7158b0;
+  --purple-shadow: #67249daa;
+
+  --blue1: #05005a;
+  --blue2: #005289;
+  --blue3: #bfebf4;
+
+  --red1: #ad3234; 
+  --red2: #67172f;
+  --red3: #ff3131;
+  --pink1: #ffeaea;
+  --pink2: #f9b3b5;
+}
+
+@font-face {
+  font-family: 'BetterVCR';
+  src: url('/fonts/BetterVCR.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1, h2, h3, p{
+  margin: 0;
+  padding: 0;
+}
+h1{
+  font-size: 20px;
+}
+h2{
+  font-size: 16px;
+}
+h3{
+  font-size: 14px;
+}
+
+p{
+  font-size: 12px;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

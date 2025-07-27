@@ -1,0 +1,44 @@
+/* POSITIONING OVER IMG TEMPLATE */
+.topCenter{
+  position: absolute;
+  top: 25px;
+  left:50%;
+  transform: translate(-50%, 0%);
+}
+
+.topRight{
+  position: absolute;
+  top:25px;
+  right:30px;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+}
+
+.left {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translate(0%,-50%);
+  display: inline-block;
+}
+
+.right{
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translate(0%,-50%);
+  display: inline-block;
+}
+
+.bottomC  enter {
+  position: absolute;
+  bottom:25px;
+  left:50%;
+  transform: translate(-50%, 0%);
+}

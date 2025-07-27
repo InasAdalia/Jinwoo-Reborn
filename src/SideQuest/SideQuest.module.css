@@ -1,0 +1,14 @@
+.sideQuestContent{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    align-content: center;
+    justify-content: center;
+}
+
+.character{
+}
+.character img{
+    filter: drop-shadow(0 0 10px rgba(255, 221, 98, 0.304));
+}
+

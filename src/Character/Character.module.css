@@ -1,0 +1,25 @@
+.character{
+    width: 200px; 
+    aspect-ratio: 1/1;
+    overflow:hidden;
+}
+
+.character img{
+    height: 100%;
+    width: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.idle{
+  animation: frames-2 1s steps(2) infinite;
+}
+
+@keyframes frames-2 {
+  from{
+    transform: translate3d(0px,0,0);
+  }
+  to{
+    transform: translate3d(-100%,0,0)
+  }
+}

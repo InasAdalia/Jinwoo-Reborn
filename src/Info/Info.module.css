@@ -1,0 +1,17 @@
+.buttonWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    margin-top: 10px;
+}
+.actionButton {
+    width:110px;
+    font-size: 10px;
+}
+.popupContent{
+    /* height: 100%;; */
+    /* display: flex; */
+    justify-content: space-between !important;
+}

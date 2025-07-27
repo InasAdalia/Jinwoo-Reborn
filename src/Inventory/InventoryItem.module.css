@@ -1,0 +1,54 @@
+.invItemContainer {
+    width: 70px;
+    max-width: 70px;
+    display: grid;
+    grid-column: 1fr;
+    grid-row: auto auto;
+    gap: 5px;
+}
+
+.invItemContainer:hover .itemFrame {
+    background-image: url('components/inventory/inventory-active.png');
+}
+
+.itemFrame{
+    position: relative;
+    width: 70px;
+    height: 70px;
+    background-image: url('components/inventory/inventory-inactive.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    justify-self: center;
+}
+
+.emptyFrame{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.itemName{
+    font-size: 8px;
+    text-align: center;
+    padding: 5px 8px 3px 8px;
+    border-radius: 5px; 
+    background-color: black;
+    max-width: 100%;
+    width:fit-content;
+    justify-self: center;
+    box-sizing: border-box;
+}
+
+.bottom{
+    grid-row: 2;
+}
+
+.top{
+    grid-row: 1;
+}
+
+.none{
+    display: none;
+}
+

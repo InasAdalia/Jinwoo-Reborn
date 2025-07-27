@@ -1,0 +1,28 @@
+.rightFrame {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+}
+
+.dialog{
+    background-image: url('/components/frames/dialog.png');
+    background-size: contain; /* Stretch width to 100%, keep aspect ratio */
+    background-position: center;
+    background-repeat: no-repeat;
+    aspect-ratio: 341/422;
+    /* padding: 3.5rem 1.8rem; */
+    height: 55%; /* or set a fixed height if needed */
+    /* height: 60%; */
+    color: var(--blue1);
+}
+
+.dialogText{
+    max-width: 90%;
+    padding: 3rem 2rem;
+    text-align: start;
+}
+
+.character{
+    height: auto;
+}
